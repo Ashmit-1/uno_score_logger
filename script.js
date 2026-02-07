@@ -123,26 +123,13 @@ function submitScores() {
         scores[playerId] = parseInt(input.value) || 0;
     });
     
-    // Check if at least one score has been entered (non-zero)
-    let hasValidScore = Object.values(scores).some(score => score > 0);
+    // Check if at least one score is greater than zero
+    const hasNonZeroScore = Object.values(scores).some(score => score > 0);
     
-    // If no valid scores were entered and this isn't the first round, check if scores are different from previous round
-    if (!hasValidScore && gameState.rounds.length > 0) {
-        // Check if all scores are the same as the previous round
-        const previousScores = gameState.rounds[gameState.rounds.length - 1].scores;
-        let scoresChanged = false;
-        
-        for (let playerId in scores) {
-            if (scores[playerId] !== previousScores[playerId]) {
-                scoresChanged = true;
-                break;
-            }
-        }
-        
-        if (!scoresChanged) {
-            alert("Please enter at least one score greater than zero or change at least one score from the previous round.");
-            return;
-        }
+    // If no scores are greater than zero, show an alert and return
+    if (!hasNonZeroScore) {
+        alert("Please enter at least one score greater than zero.");
+        return;
     }
     
     // Save scores for this round
