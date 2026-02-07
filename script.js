@@ -20,7 +20,6 @@ const scoreForms = document.getElementById('score-forms');
 const submitScoresBtn = document.getElementById('submit-scores-btn');
 const leaderboardBody = document.getElementById('leaderboard-body');
 const finalLeaderboardBody = document.getElementById('final-leaderboard-body');
-const addRoundBtn = document.getElementById('add-round-btn');
 const endGameBtn = document.getElementById('end-game-btn');
 const newGameBtn = document.getElementById('new-game-btn');
 const roundHistoryHeader = document.getElementById('round-history-header');
@@ -31,7 +30,6 @@ startGameBtn.addEventListener('click', showPlayersSetup);
 addPlayerBtn.addEventListener('click', addPlayerInput);
 donePlayersBtn.addEventListener('click', startGame);
 submitScoresBtn.addEventListener('click', submitScores);
-addRoundBtn.addEventListener('click', addNewRound);
 endGameBtn.addEventListener('click', endGame);
 newGameBtn.addEventListener('click', resetGame);
 
@@ -190,6 +188,10 @@ function submitScores() {
     
     // Update round history table
     updateRoundHistoryTable();
+    
+    // Increment round number
+    gameState.currentRound++;
+    roundNumber.textContent = gameState.currentRound;
     
     // Reset score inputs to 0
     scoreInputs.forEach(input => {

@@ -85,6 +85,14 @@ header h1 {
     background-color: #e53935;
 }
 
+.btn.primary {
+    background-color: #4ecdc4;
+}
+
+.btn.primary:hover {
+    background-color: #3db9b1;
+}
+
 /* Player Rows */
 .player-row {
     display: flex;
