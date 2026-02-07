@@ -113,6 +113,11 @@ function submitScores() {
     
     // Update leaderboard
     updateLeaderboard();
+    
+    // Reset score inputs to 0
+    scoreInputs.forEach(input => {
+        input.value = 0;
+    });
 }
 
 function updateLeaderboard() {
