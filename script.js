@@ -2,7 +2,8 @@
 let gameState = {
     players: [],
     rounds: [],
-    currentRound: 1
+    currentRound: 1,
+    previousScores: {}
 };
 
 // DOM Elements
@@ -64,6 +65,9 @@ function startGame() {
     // Initialize rounds array
     gameState.rounds = [];
     
+    // Initialize previous scores
+    gameState.previousScores = {};
+    
     // Show game screen
     playersSetup.classList.add('hidden');
     gameScreen.classList.remove('hidden');
@@ -113,10 +117,33 @@ function submitScores() {
     const scores = {};
     const scoreInputs = document.querySelectorAll('.score-input');
     
+    // Populate scores object
     scoreInputs.forEach(input => {
         const playerId = parseInt(input.dataset.playerId);
         scores[playerId] = parseInt(input.value) || 0;
     });
+    
+    // Check if at least one score has been entered (non-zero)
+    let hasValidScore = Object.values(scores).some(score => score > 0);
+    
+    // If no valid scores were entered and this isn't the first round, check if scores are different from previous round
+    if (!hasValidScore && gameState.rounds.length > 0) {
+        // Check if all scores are the same as the previous round
+        const previousScores = gameState.rounds[gameState.rounds.length - 1].scores;
+        let scoresChanged = false;
+        
+        for (let playerId in scores) {
+            if (scores[playerId] !== previousScores[playerId]) {
+                scoresChanged = true;
+                break;
+            }
+        }
+        
+        if (!scoresChanged) {
+            alert("Please enter at least one score greater than zero or change at least one score from the previous round.");
+            return;
+        }
+    }
     
     // Save scores for this round
     gameState.rounds.push({
