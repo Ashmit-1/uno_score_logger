@@ -22,6 +22,8 @@ const finalLeaderboardBody = document.getElementById('final-leaderboard-body');
 const addRoundBtn = document.getElementById('add-round-btn');
 const endGameBtn = document.getElementById('end-game-btn');
 const newGameBtn = document.getElementById('new-game-btn');
+const roundHistoryHeader = document.getElementById('round-history-header');
+const roundHistoryBody = document.getElementById('round-history-body');
 
 // Event Listeners
 startGameBtn.addEventListener('click', showPlayersSetup);
@@ -72,6 +74,9 @@ function startGame() {
     // Create score entry forms
     createScoreEntryForms();
     
+    // Initialize round history table
+    initializeRoundHistoryTable();
+    
     // Initialize leaderboard
     updateLeaderboard();
 }
@@ -88,6 +93,19 @@ function createScoreEntryForms() {
         `;
         scoreForms.appendChild(row);
     });
+}
+
+function initializeRoundHistoryTable() {
+    // Create table header
+    let headerHtml = '<tr><th>Round</th>';
+    gameState.players.forEach(player => {
+        headerHtml += `<th>${player.name}</th>`;
+    });
+    headerHtml += '</tr>';
+    roundHistoryHeader.innerHTML = headerHtml;
+    
+    // Clear table body
+    roundHistoryBody.innerHTML = '';
 }
 
 function submitScores() {
@@ -114,6 +132,9 @@ function submitScores() {
     // Update leaderboard
     updateLeaderboard();
     
+    // Update round history table
+    updateRoundHistoryTable();
+    
     // Reset score inputs to 0
     scoreInputs.forEach(input => {
         input.value = 0;
@@ -137,6 +158,29 @@ function updateLeaderboard() {
     });
 }
 
+function updateRoundHistoryTable() {
+    // Clear the table body
+    roundHistoryBody.innerHTML = '';
+    
+    // Add rows for each round
+    gameState.rounds.forEach(round => {
+        let rowHtml = `<tr><td>${round.roundNumber}</td>`;
+        gameState.players.forEach(player => {
+            rowHtml += `<td>${round.scores[player.id] || 0}</td>`;
+        });
+        rowHtml += '</tr>';
+        roundHistoryBody.innerHTML += rowHtml;
+    });
+    
+    // Add totals row
+    let totalsRowHtml = '<tr><td>Total</td>';
+    gameState.players.forEach(player => {
+        totalsRowHtml += `<td>${player.totalScore}</td>`;
+    });
+    totalsRowHtml += '</tr>';
+    roundHistoryBody.innerHTML += totalsRowHtml;
+}
+
 function addNewRound() {
     gameState.currentRound++;
     roundNumber.textContent = gameState.currentRound;
@@ -146,6 +190,9 @@ function addNewRound() {
     scoreInputs.forEach(input => {
         input.value = 0;
     });
+    
+    // Update round history table
+    updateRoundHistoryTable();
 }
 
 function endGame() {
