@@ -35,20 +35,62 @@ addRoundBtn.addEventListener('click', addNewRound);
 endGameBtn.addEventListener('click', endGame);
 newGameBtn.addEventListener('click', resetGame);
 
+// Keep track of player count for indexing
+let playerCount = 4;
+
 // Functions
 function showPlayersSetup() {
     startScreen.classList.add('hidden');
     playersSetup.classList.remove('hidden');
+    
+    // Attach event listeners to delete buttons
+    document.querySelectorAll('.delete-player-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            deletePlayer(parseInt(this.dataset.index));
+        });
+    });
+    
+    // Reset player count
+    playerCount = 4;
 }
 
 function addPlayerInput() {
-    const playerCount = document.querySelectorAll('.player-input').length;
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.className = 'player-input';
-    input.placeholder = `Player ${playerCount + 1} name`;
-    input.dataset.index = playerCount;
-    playersList.appendChild(input);
+    const playersList = document.getElementById('players-list');
+    const playerRow = document.createElement('div');
+    playerRow.className = 'player-row';
+    playerRow.innerHTML = `
+        <input type="text" class="player-input" placeholder="Player ${playerCount + 1} name" data-index="${playerCount}">
+        <button class="delete-player-btn" data-index="${playerCount}">✕</button>
+    `;
+    playersList.appendChild(playerRow);
+    
+    // Add event listener to the new delete button
+    const newDeleteBtn = playerRow.querySelector('.delete-player-btn');
+    newDeleteBtn.addEventListener('click', function() {
+        deletePlayer(parseInt(this.dataset.index));
+    });
+    
+    playerCount++;
+}
+
+function deletePlayer(index) {
+    // Don't allow deleting if there are only 2 players left
+    const playerRows = document.querySelectorAll('.player-row');
+    if (playerRows.length <= 2) {
+        alert("You need at least 2 players to play the game.");
+        return;
+    }
+    
+    // Find and remove the player row
+    const playerRowsArray = Array.from(document.querySelectorAll('.player-row'));
+    const rowToDelete = playerRowsArray.find(row => {
+        const input = row.querySelector('.player-input');
+        return parseInt(input.dataset.index) === index;
+    });
+    
+    if (rowToDelete) {
+        rowToDelete.remove();
+    }
 }
 
 function startGame() {
@@ -235,16 +277,40 @@ function resetGame() {
     gameState = {
         players: [],
         rounds: [],
-        currentRound: 1
+        currentRound: 1,
+        previousScores: {}
     };
     
-    // Clear player inputs
+    // Reset player count
+    playerCount = 4;
+    
+    // Reset player inputs
+    const playersList = document.getElementById('players-list');
     playersList.innerHTML = `
-        <input type="text" class="player-input" placeholder="Player 1 name" data-index="0">
-        <input type="text" class="player-input" placeholder="Player 2 name" data-index="1">
-        <input type="text" class="player-input" placeholder="Player 3 name" data-index="2">
-        <input type="text" class="player-input" placeholder="Player 4 name" data-index="3">
+        <div class="player-row">
+            <input type="text" class="player-input" placeholder="Player 1 name" data-index="0">
+            <button class="delete-player-btn" data-index="0">✕</button>
+        </div>
+        <div class="player-row">
+            <input type="text" class="player-input" placeholder="Player 2 name" data-index="1">
+            <button class="delete-player-btn" data-index="1">✕</button>
+        </div>
+        <div class="player-row">
+            <input type="text" class="player-input" placeholder="Player 3 name" data-index="2">
+            <button class="delete-player-btn" data-index="2">✕</button>
+        </div>
+        <div class="player-row">
+            <input type="text" class="player-input" placeholder="Player 4 name" data-index="3">
+            <button class="delete-player-btn" data-index="3">✕</button>
+        </div>
     `;
+    
+    // Attach event listeners to delete buttons
+    document.querySelectorAll('.delete-player-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            deletePlayer(parseInt(this.dataset.index));
+        });
+    });
     
     // Hide all screens and show start screen
     endGameScreen.classList.add('hidden');

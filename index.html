@@ -21,10 +21,22 @@
         <div id="players-setup" class="screen hidden">
             <h2>Add Players</h2>
             <div id="players-list">
-                <input type="text" class="player-input" placeholder="Player 1 name" data-index="0">
-                <input type="text" class="player-input" placeholder="Player 2 name" data-index="1">
-                <input type="text" class="player-input" placeholder="Player 3 name" data-index="2">
-                <input type="text" class="player-input" placeholder="Player 4 name" data-index="3">
+                <div class="player-row">
+                    <input type="text" class="player-input" placeholder="Player 1 name" data-index="0">
+                    <button class="delete-player-btn" data-index="0">✕</button>
+                </div>
+                <div class="player-row">
+                    <input type="text" class="player-input" placeholder="Player 2 name" data-index="1">
+                    <button class="delete-player-btn" data-index="1">✕</button>
+                </div>
+                <div class="player-row">
+                    <input type="text" class="player-input" placeholder="Player 3 name" data-index="2">
+                    <button class="delete-player-btn" data-index="2">✕</button>
+                </div>
+                <div class="player-row">
+                    <input type="text" class="player-input" placeholder="Player 4 name" data-index="3">
+                    <button class="delete-player-btn" data-index="3">✕</button>
+                </div>
             </div>
             <button id="add-player-btn" class="btn secondary">Add Player</button>
             <button id="done-players-btn" class="btn">Done</button>

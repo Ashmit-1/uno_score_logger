@@ -85,6 +85,38 @@ header h1 {
     background-color: #e53935;
 }
 
+/* Player Rows */
+.player-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.player-row .player-input {
+    flex-grow: 1;
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
+.delete-player-btn {
+    background-color: #ff5252;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.delete-player-btn:hover {
+    background-color: #e53935;
+}
+
 /* Player Inputs */
 .player-input {
     width: 80%;
