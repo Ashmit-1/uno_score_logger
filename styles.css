@@ -209,6 +209,25 @@ tr:first-child td {
     color: #ff6b6b;
 }
 
+#round-history {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;      /* horizontal scroll */
+  overflow-y: hidden;    /* optional */
+  -webkit-overflow-scrolling: touch; /* smooth scroll on mobile */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: max-content; 
+}
+
+th, td {
+  white-space: nowrap;   /* prevents column wrapping */
+  padding: 8px 12px;
+}
+
 #round-history th:first-child,
 #round-history td:first-child {
     background-color: #4ecdc4;
