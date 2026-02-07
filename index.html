@@ -1,111 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UNO Score Tracker</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <div class="container">
         <header>
+            <img src="logo.png" alt="UNO Score Tracker" class="logo" />
             <h1>UNO Score Tracker</h1>
         </header>
 
-        <!-- Start Screen -->
-        <div id="start-screen" class="screen">
-            <button id="start-game-btn" class="btn">Start New Game</button>
+      <!-- Start Screen -->
+      <div id="start-screen" class="screen">
+        <button id="start-game-btn" class="btn">Start New Game</button>
+      </div>
+
+      <!-- Players Setup Screen -->
+      <div id="players-setup" class="screen hidden">
+        <h2>Add Players</h2>
+        <div id="players-list">
+          <div class="player-row">
+            <input
+              type="text"
+              class="player-input"
+              placeholder="Player 1 name"
+              data-index="0"
+            />
+            <button class="delete-player-btn" data-index="0">✕</button>
+          </div>
+          <div class="player-row">
+            <input
+              type="text"
+              class="player-input"
+              placeholder="Player 2 name"
+              data-index="1"
+            />
+            <button class="delete-player-btn" data-index="1">✕</button>
+          </div>
+          <div class="player-row">
+            <input
+              type="text"
+              class="player-input"
+              placeholder="Player 3 name"
+              data-index="2"
+            />
+            <button class="delete-player-btn" data-index="2">✕</button>
+          </div>
+          <div class="player-row">
+            <input
+              type="text"
+              class="player-input"
+              placeholder="Player 4 name"
+              data-index="3"
+            />
+            <button class="delete-player-btn" data-index="3">✕</button>
+          </div>
+        </div>
+        <button id="add-player-btn" class="btn secondary">Add Player</button>
+        <button id="done-players-btn" class="btn">Done</button>
+      </div>
+
+      <!-- Game Screen -->
+      <div id="game-screen" class="screen hidden">
+        <h2>Round <span id="round-number">1</span></h2>
+
+        <!-- Score Entry Form -->
+        <div id="score-entry">
+          <h3>Enter Scores</h3>
+          <div id="score-forms"></div>
+          <div class="actions">
+            <button id="submit-scores-btn" class="btn primary">
+              Submit Scores
+            </button>
+            <button id="end-game-btn" class="btn danger">End Game</button>
+          </div>
         </div>
 
-        <!-- Players Setup Screen -->
-        <div id="players-setup" class="screen hidden">
-            <h2>Add Players</h2>
-            <div id="players-list">
-                <div class="player-row">
-                    <input type="text" class="player-input" placeholder="Player 1 name" data-index="0">
-                    <button class="delete-player-btn" data-index="0">✕</button>
-                </div>
-                <div class="player-row">
-                    <input type="text" class="player-input" placeholder="Player 2 name" data-index="1">
-                    <button class="delete-player-btn" data-index="1">✕</button>
-                </div>
-                <div class="player-row">
-                    <input type="text" class="player-input" placeholder="Player 3 name" data-index="2">
-                    <button class="delete-player-btn" data-index="2">✕</button>
-                </div>
-                <div class="player-row">
-                    <input type="text" class="player-input" placeholder="Player 4 name" data-index="3">
-                    <button class="delete-player-btn" data-index="3">✕</button>
-                </div>
-            </div>
-            <button id="add-player-btn" class="btn secondary">Add Player</button>
-            <button id="done-players-btn" class="btn">Done</button>
+        <!-- Round History -->
+        <div id="round-history">
+          <h3>Round History</h3>
+          <table>
+            <thead id="round-history-header">
+              <!-- Header will be populated by JavaScript -->
+            </thead>
+            <tbody id="round-history-body">
+              <!-- Round history will be populated by JavaScript -->
+            </tbody>
+          </table>
         </div>
 
-        <!-- Game Screen -->
-        <div id="game-screen" class="screen hidden">
-            <h2>Round <span id="round-number">1</span></h2>
-            
-            <!-- Score Entry Form -->
-            <div id="score-entry">
-                <h3>Enter Scores</h3>
-                <div id="score-forms"></div>
-                <div class="actions">
-                    <button id="submit-scores-btn" class="btn primary">Submit Scores</button>
-                    <button id="end-game-btn" class="btn danger">End Game</button>
-                </div>
-            </div>
-            
-            <!-- Round History -->
-            <div id="round-history">
-                <h3>Round History</h3>
-                <table>
-                    <thead id="round-history-header">
-                        <!-- Header will be populated by JavaScript -->
-                    </thead>
-                    <tbody id="round-history-body">
-                        <!-- Round history will be populated by JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <!-- Leaderboard -->
-            <div id="leaderboard">
-                <h3>Leaderboard</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Player</th>
-                            <th>Total Score</th>
-                        </tr>
-                    </thead>
-                    <tbody id="leaderboard-body">
-                        <!-- Leaderboard will be populated by JavaScript -->
-                    </tbody>
-                </table>
-            </div>
+        <!-- Leaderboard -->
+        <div id="leaderboard">
+          <h3>Leaderboard</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Total Score</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-body">
+              <!-- Leaderboard will be populated by JavaScript -->
+            </tbody>
+          </table>
         </div>
+      </div>
 
-        <!-- End Game Screen -->
-        <div id="end-game-screen" class="screen hidden">
-            <h2>Final Leaderboard</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Player</th>
-                        <th>Total Score</th>
-                    </tr>
-                </thead>
-                <tbody id="final-leaderboard-body">
-                    <!-- Final leaderboard will be populated by JavaScript -->
-                </tbody>
-            </table>
-            <button id="new-game-btn" class="btn">Start New Game</button>
-        </div>
+      <!-- End Game Screen -->
+      <div id="end-game-screen" class="screen hidden">
+        <h2>Final Leaderboard</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Player</th>
+              <th>Total Score</th>
+            </tr>
+          </thead>
+          <tbody id="final-leaderboard-body">
+            <!-- Final leaderboard will be populated by JavaScript -->
+          </tbody>
+        </table>
+        <button id="new-game-btn" class="btn">Start New Game</button>
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
