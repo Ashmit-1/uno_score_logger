@@ -321,6 +321,25 @@ tr:first-child td {
     transition: color 0.3s;
 }
 
+#round-history {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;      /* horizontal scroll */
+  overflow-y: hidden;    /* optional */
+  -webkit-overflow-scrolling: touch; /* smooth scroll on mobile */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: max-content; 
+}
+
+th, td {
+  white-space: nowrap;   /* prevents column wrapping */
+  padding: 8px 12px;
+}
+
 #round-history th:first-child,
 #round-history td:first-child {
     background-color: var(--round-history-first-bg);
