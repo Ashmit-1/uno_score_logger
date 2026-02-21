@@ -43,8 +43,10 @@ def get_game_by_id(db: Session, user: User, game_id: int):
 def add_round(db: Session, user: User, game_id: int, round_data: RoundCreate):
     game = get_game_by_id(db, user, game_id)
 
+    existing_rounds = db.query(Round).filter(Round.game_id == game.id).count()
+
     round_obj = Round(
-        round_number=round_data.round_number,
+        round_number=existing_rounds + 1,
         game_id=game.id
     )
 
