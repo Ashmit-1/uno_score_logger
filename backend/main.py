@@ -1,15 +1,16 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-
 from database import get_db, engine
 from models import User, Base
 from schemas import UserCreate, UserResponse, UserLogin
 from auth import hash_password, verify_password, create_access_token, get_current_user
+from routers import game
 
+app = FastAPI()
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
+app.include_router(game.router)
 
 @app.get("/")
 def test_db(db: Session = Depends(get_db)):
