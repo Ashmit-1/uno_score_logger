@@ -29,7 +29,7 @@ authForm.addEventListener('submit', async (e) => {
     const usernameInput = document.getElementById('username').value;
     const passwordInput = document.getElementById('password').value;
 
-    const url = `http://127.0.0.1:8000${isLogin ? '/login' : '/signup'}`;
+    const url = `https://uno-backend-api-685258470441.asia-south1.run.app${isLogin ? '/login' : '/signup'}`;
 
     try {
         const response = await fetch(url, {

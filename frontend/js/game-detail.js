@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // A. Send to Backend (Don't wait for refresh, just post)
         try {
-            fetch(`http://127.0.0.1:8000/games/${gameId}/round`, {
+            fetch(`https://uno-backend-api-685258470441.asia-south1.run.app/games/${gameId}/round`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ round_number: roundNum, scores: newRoundScores })
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function fetchInitialData() {
     const loader = document.getElementById('loader-overlay');
     try {
-        const res = await fetch(`http://127.0.0.1:8000/games/${gameId}`, {
+        const res = await fetch(`https://uno-backend-api-685258470441.asia-south1.run.app/games/${gameId}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await res.json();
