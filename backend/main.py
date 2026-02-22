@@ -11,7 +11,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # allow all (for now)
+    allow_origins=["https://letsplayuno.netlify.app/"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
