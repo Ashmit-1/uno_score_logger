@@ -3,6 +3,7 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
+import hashlib
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 
@@ -20,8 +21,7 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24  # 1 day
 
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
+pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 
 def hash_password(password: str):
     return pwd_context.hash(password)
@@ -29,7 +29,6 @@ def hash_password(password: str):
 
 def verify_password(plain_password: str, hashed_password: str):
     return pwd_context.verify(plain_password, hashed_password)
-
 
 
 def create_access_token(data: dict):

@@ -11,7 +11,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://letsplayuno.netlify.app/"], 
+    allow_origins=["https://letsplayuno.netlify.app"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -61,3 +61,4 @@ def get_me(current_user: User = Depends(get_current_user)):
         "id": current_user.id,
         "user_id": current_user.user_id
     }
+
