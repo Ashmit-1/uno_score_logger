@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Scoring - UNO Logger</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/game-detail.css">
+    <script src="js/theme.js"></script>
+</head>
+<body>
+    <div id="loader-overlay">
+        <div class="spinner"></div>
+        <p class="loading-text">Loading Game Data...</p>
+    </div>
+    <button id="theme-toggle" class="floating-toggle">🌙</button>
+
+    <div class="container wide">
+        <header class="dashboard-header">
+            <div class="logo-container">
+                <img src="assets/logo.png" alt="Logo" class="app-logo">
+                <h1 id="game-display-name">Loading Game...</h1>
+            </div>
+        </header>
+
+        <section id="scoring-section" class="content-block">
+            <div class="block-header">
+                <h3>New Round Scores</h3>
+                <p>Enter points for each player for the current round</p>
+            </div>
+            <form id="round-form" class="score-form-grid">
+                <div id="score-inputs-list" class="inputs-wrapper">
+                    </div>
+                <div class="form-footer">
+                    <button type="submit" class="btn-primary">Add Round & Update Stats</button>
+                    <button type="button" id="end-game-btn" class="btn-outline-danger">End Match</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="content-block">
+            <div class="block-header">
+                <h3>🏆 Current Standings</h3>
+            </div>
+            <div id="leaderboard-list" class="leaderboard-grid">
+                </div>
+        </section>
+
+        <section class="content-block history-block">
+            <div class="block-header">
+                <h3>Match History</h3>
+            </div>
+            <div class="table-wrapper">
+                <table id="history-table">
+                    <thead>
+                        <tr id="table-head-row">
+                            <th>Round</th>
+                            </tr>
+                    </thead>
+                    <tbody id="table-body-rows"></tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+    <script src="js/game-detail.js"></script>
+</body>
+</html>
