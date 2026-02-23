@@ -1,3 +1,6 @@
+// const api_end_point_url = "https://uno-backend-api-685258470441.asia-south1.run.app"
+const api_end_point_url = "http://127.0.0.1:8000"
+
 document.addEventListener('DOMContentLoaded', async () => {
 
     const token = localStorage.getItem('token');
@@ -19,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- Fetch Games ---
     try {
-        const response = await fetch('https://uno-backend-api-685258470441.asia-south1.run.app/games/', {
+        const response = await fetch(api_end_point_url + '/games/', {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'accept': 'application/json'

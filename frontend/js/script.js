@@ -1,3 +1,6 @@
+// const api_end_point_url = "https://uno-backend-api-685258470441.asia-south1.run.app"
+const api_end_point_url = "http://127.0.0.1:8000"
+
 const authForm = document.getElementById('auth-form');
 const loginTab = document.getElementById('login-tab');
 const signupTab = document.getElementById('signup-tab');
@@ -25,11 +28,19 @@ authForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorMsg.classList.add('hidden');
 
+    const loader = document.getElementById("loader");
+    const btn = document.getElementById("submit-btn")
+
+    // 🔥 Show loader instantly
+    loader.style.display = "block";
+    btn.disabled = true;
+    btn.innerText = "Logging in...";
+
     // Get values from the input fields
     const usernameInput = document.getElementById('username').value;
     const passwordInput = document.getElementById('password').value;
 
-    const url = `https://uno-backend-api-685258470441.asia-south1.run.app${isLogin ? '/login' : '/signup'}`;
+    const url = api_end_point_url + `${isLogin ? '/login' : '/signup'}`;
 
     try {
         const response = await fetch(url, {
@@ -74,5 +85,8 @@ authForm.addEventListener('submit', async (e) => {
     } catch (err) {
         errorMsg.textContent = "Server connection failed. Is the backend running?";
         errorMsg.classList.remove('hidden');
+        loader.style.display = "none";
+        btn.disabled = false;
+        btn.innerText = "Login";
     }
 });

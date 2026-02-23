@@ -1,6 +1,8 @@
 const urlParams = new URLSearchParams(window.location.search);
 const gameId = urlParams.get('id');
 const token = localStorage.getItem('token');
+// const api_end_point_url = "https://uno-backend-api-685258470441.asia-south1.run.app"
+const api_end_point_url = "http://127.0.0.1:8000"
 
 // GLOBAL STATE: This holds our local copy of the data
 let gameState = {
@@ -35,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // A. Send to Backend (Don't wait for refresh, just post)
         try {
-            fetch(`https://uno-backend-api-685258470441.asia-south1.run.app/games/${gameId}/round`, {
+            fetch(api_end_point_url + `/games/${gameId}/round`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ round_number: roundNum, scores: newRoundScores })
@@ -71,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function fetchInitialData() {
     const loader = document.getElementById('loader-overlay');
     try {
-        const res = await fetch(`https://uno-backend-api-685258470441.asia-south1.run.app/games/${gameId}`, {
+        const res = await fetch(api_end_point_url + `/games/${gameId}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await res.json();
