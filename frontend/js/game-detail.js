@@ -1,8 +1,8 @@
 const urlParams = new URLSearchParams(window.location.search);
 const gameId = urlParams.get('id');
 const token = localStorage.getItem('token');
-// const api_end_point_url = "https://uno-backend-api-685258470441.asia-south1.run.app"
-const api_end_point_url = "http://127.0.0.1:8000"
+const api_end_point_url = "https://uno-backend-api-685258470441.asia-south1.run.app"
+// const api_end_point_url = "http://127.0.0.1:8000"
 
 // GLOBAL STATE: This holds our local copy of the data
 let gameState = {

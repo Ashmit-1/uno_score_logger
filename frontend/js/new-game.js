@@ -1,5 +1,5 @@
-// const api_end_point_url = "https://uno-backend-api-685258470441.asia-south1.run.app"
-const api_end_point_url = "http://127.0.0.1:8000"
+const api_end_point_url = "https://uno-backend-api-685258470441.asia-south1.run.app"
+// const api_end_point_url = "http://127.0.0.1:8000"
 
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('player-inputs-container');
